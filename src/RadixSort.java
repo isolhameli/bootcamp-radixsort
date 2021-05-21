@@ -3,10 +3,11 @@ import java.util.Arrays;
 
 public class RadixSort {
 
-    public static ArrayList<String> prepareArrays(int iArr[]) {
+    public static ArrayList<String> prepareArrays(int[] iArr) {
         String sArr[] = new String[iArr.length];
         int maxLength = 0;
         int length;
+        String toAdd;
         for (int i = 0; i < iArr.length; i++) {
             sArr[i] = Integer.toString(iArr[i]);
             length = sArr[i].length();
@@ -16,7 +17,7 @@ public class RadixSort {
         }
         for (int i = 0; i < iArr.length; i++) {
             length = sArr[i].length();
-            String toAdd = "";
+            toAdd = "";
             for (int j = 0; j < maxLength - length; j++) {
                 toAdd += "0";
             }
@@ -50,7 +51,7 @@ public class RadixSort {
         return concatenatedArray;
     }
 
-    public static ArrayList<Integer> radixSort(int iArr[]) {
+    public static void radixSort(int iArr[]) {
 
         ArrayList<String> sArr = prepareArrays(iArr);
         int maxLength = sArr.get(0).length();
@@ -60,12 +61,10 @@ public class RadixSort {
             sArr = concatenatedArray;
         }
 
-        ArrayList<Integer> sortedArray = new ArrayList<>();
-        for (String element : sArr) {
-            sortedArray.add(Integer.parseInt(element));
-        }
 
-        return sortedArray;
+        for (int i = 0; i < sArr.size(); i++)  {
+            iArr[i] = Integer.parseInt(sArr.get(i));
+        }
 
     }
 
@@ -73,9 +72,9 @@ public class RadixSort {
     public static void main(String[] args) {
         int iArr[] = {16233, 898, 13, 906, 235, 23, 9, 1532, 6388, 2511, 8};
 
-        ArrayList<Integer> sortedArray = radixSort(iArr);
+        radixSort(iArr);
 
-        for (int i : sortedArray) {
+        for (int i : iArr) {
             System.out.print(i + " ");
         }
     }
